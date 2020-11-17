@@ -5,6 +5,13 @@
  */
 package criminalmanagementpackage;
 
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ATIK SHAIKH
@@ -33,10 +40,10 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txtUser = new javax.swing.JTextField();
+        txtPass = new javax.swing.JPasswordField();
+        txtSubmit = new javax.swing.JButton();
+        txtAdminl = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,31 +91,31 @@ public class Login extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("Password");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtUserActionPerformed(evt);
             }
         });
 
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        txtPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                txtPassActionPerformed(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setText("SUBMIT");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        txtSubmit.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtSubmit.setText("SUBMIT");
+        txtSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                txtSubmitActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton2.setText("ADMIN LOGIN");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        txtAdminl.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtAdminl.setText("ADMIN LOGIN");
+        txtAdminl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                txtAdminlActionPerformed(evt);
             }
         });
 
@@ -126,8 +133,8 @@ public class Login extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addGap(42, 42, 42)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel4)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(125, 125, 125)
@@ -135,10 +142,10 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
+                .addComponent(txtAdminl, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,15 +156,15 @@ public class Login extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAdminl, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -165,22 +172,72 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtUserActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void txtSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubmitActionPerformed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_txtSubmitActionPerformed
+Connection con;
+PreparedStatement pst;
+ResultSet rs;
+    private void txtAdminlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdminlActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+       if(txtUser.getText().isEmpty() || txtPass.getText().isEmpty())
+       {
+           JOptionPane.showMessageDialog(this,"Please Insert Username & Password");
+       }
+       else
+       {
+           String Username=txtUser.getText();
+           String Password=txtPass.getText();
+           try {
+               Class.forName("com.mysql.jdbc.Driver");
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           con = DriverManager.getConnection("jdbc:mysql://localhost/criminal_management","akankshamudge","Akanksha@112233");
+           try {
+               pst = (PreparedStatement) con.prepareStatement("SELECT * FROM admin_login WHERE admin_username=? and admin_pass=?");
+           } catch (SQLException ex) {
+               Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           try {
+               pst.setString(1,Username);
+           } catch (SQLException ex) {
+               Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           try {
+               pst.setString(2,Password);
+           } catch (SQLException ex) {
+               Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           try {
+               rs=(ResultSet) pst.executeQuery();
+           } catch (SQLException ex) {
+               Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           if(rs.next())
+           {
+               admin a=new admin();
+               this.hide();
+               a.setVisible(true);
+           }
+           else
+           {
+               JOptionPane.showMessageDialog(this,"Incorrect Username & Password");
+               txtUser.setText("");
+               txtPass.setText("");
+               txtUser.requestFocus();
+           }
+       }
+    }//GEN-LAST:event_txtAdminlActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_txtPassActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,15 +275,19 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton txtAdminl;
+    private javax.swing.JPasswordField txtPass;
+    private javax.swing.JButton txtSubmit;
+    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
+
+    private void JOptionPaneMessageDialog(String please_Insert_Username__Password) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
