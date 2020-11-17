@@ -198,7 +198,7 @@ ResultSet rs;
            } catch (ClassNotFoundException ex) {
                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
            }
-           con = DriverManager.getConnection("jdbc:mysql://localhost/criminal_management","akankshamudge","Akanksha@112233");
+           con = DriverManager.getConnection("jdbc:mysql:/localhost/criminal_management","root","Atik9869@9869");
            try {
                pst = (PreparedStatement) con.prepareStatement("SELECT * FROM admin_login WHERE admin_username=? and admin_pass=?");
            } catch (SQLException ex) {
