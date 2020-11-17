@@ -1,1 +1,2 @@
-# datasciencecoursera
+# JAVA MINI PROJECT
+
