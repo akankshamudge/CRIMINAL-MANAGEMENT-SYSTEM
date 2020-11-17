@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
+import java.util.*;
 /**
  *
  * @author ATIK SHAIKH
@@ -185,54 +185,54 @@ PreparedStatement pst;
 ResultSet rs;
     private void txtAdminlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdminlActionPerformed
         // TODO add your handling code here:
-       if(txtUser.getText().isEmpty() || txtPass.getText().isEmpty())
-       {
-           JOptionPane.showMessageDialog(this,"Please Insert Username & Password");
-       }
-       else
-       {
-           String Username=txtUser.getText();
-           String Password=txtPass.getText();
-           try {
-               Class.forName("com.mysql.jdbc.Driver");
-           } catch (ClassNotFoundException ex) {
-               Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           con = DriverManager.getConnection("jdbc:mysql://localhost/criminal_management","akankshamudge","Akanksha@112233");
-           try {
-               pst = (PreparedStatement) con.prepareStatement("SELECT * FROM admin_login WHERE admin_username=? and admin_pass=?");
-           } catch (SQLException ex) {
-               Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           try {
-               pst.setString(1,Username);
-           } catch (SQLException ex) {
-               Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           try {
-               pst.setString(2,Password);
-           } catch (SQLException ex) {
-               Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           try {
-               rs=(ResultSet) pst.executeQuery();
-           } catch (SQLException ex) {
-               Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           if(rs.next())
-           {
-               admin a=new admin();
-               this.hide();
-               a.setVisible(true);
-           }
-           else
-           {
-               JOptionPane.showMessageDialog(this,"Incorrect Username & Password");
-               txtUser.setText("");
-               txtPass.setText("");
-               txtUser.requestFocus();
-           }
-       }
+        if(txtUser.getText().isEmpty() || txtPass.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this,"Please Enter Username And Password");
+        }
+        else
+        {
+            String Username=txtUser.getText();
+            String Password=txtPass.getText();
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            con = DriverManager.getConnection("jdbc:mysql://localhost/criminal_management","akankshamudge","Akanksha@112233");
+            try {
+                pst =(PreparedStatement) con.prepareStatement("SELECT * FROM admin_login WHERE admin_username=? and admin_pass=?");
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                pst.setString(1,Username);
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                pst.setString(2,Password);
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                rs=(ResultSet) pst.executeQuery();
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(rs.next())
+            {
+                admin a=new admin();
+                this.hide();
+                a.setVisible(true);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this,"Incorrect Username & Password");
+                txtUser.setText("");
+                txtPass.setText("");
+                txtUser.requestFocus();
+            }
+        }
     }//GEN-LAST:event_txtAdminlActionPerformed
 
     private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
