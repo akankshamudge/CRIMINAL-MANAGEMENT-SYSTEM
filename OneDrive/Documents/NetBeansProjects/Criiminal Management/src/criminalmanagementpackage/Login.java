@@ -4,17 +4,18 @@
  * and open the template in the editor.
  */
 package criminalmanagementpackage;
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 import java.util.logging.Level;
+import java.sql.DriverManager;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import java.util.*;
+
 /**
  *
- * @author ATIK SHAIKH
+ * @author ATIQ SHAIKH
  */
 public class Login extends javax.swing.JFrame {
 
@@ -125,44 +126,45 @@ public class Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtSubmit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtAdminl)
+                .addGap(108, 108, 108))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5))
-                                .addGap(42, 42, 42)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtAdminl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(105, 105, 105))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(139, 139, 139)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAdminl, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSubmit)
+                    .addComponent(txtAdminl))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pack();
@@ -172,112 +174,83 @@ public class Login extends javax.swing.JFrame {
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserActionPerformed
+    Connection con ;
+    PreparedStatement pst;
+    ResultSet rs;
 
     private void txtSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubmitActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_txtSubmitActionPerformed
-Connection con;
-PreparedStatement pst;
-ResultSet rs;
-    private void txtAdminlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdminlActionPerformed
-        // TODO add your handling code here:
-        if(txtUser.getText().isEmpty() || txtPass.getText().isEmpty())
+        if (txtUser.getText().length()==0 || txtPass.getText().length()==0)
         {
-            JOptionPane.showMessageDialog(this,"Please Enter Username And Password");
+            JOptionPane.showMessageDialog(this,"Username or password field empty.");
         }
         else
         {
-            String Username=txtUser.getText();
-            String Password=txtPass.getText();
             try {
+                //code for database
+                String user = txtUser.getText();
+                String pass = txtPass.getText();
                 Class.forName("com.mysql.jdbc.Driver");
-            } catch (ClassNotFoundException ex) {
+                con = DriverManager.getConnection("jdbc:mysql://localhost/criminal_management", "root", "Atik9869@9869");
+                pst = con.prepareStatement("select * from user_login where username=? and password=?");
+                pst.setString(1, user);
+                pst.setString(2, pass);
+                rs = (ResultSet) pst.executeQuery();
+                if (rs.next())
+                {
+                    User u = new User();
+                    this.hide();
+                    u.setVisible(true);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this,"Incorrect Username or Password");
+                    txtUser.setText("");
+                    txtPass.setText("");
+                    txtUser.requestFocus();
+                }
+            } catch (ClassNotFoundException | SQLException ex ) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
-            con = DriverManager.getConnection("jdbc:mysql://localhost/criminal_management","akankshamudge","Akanksha@112233");
+            
+        }
+        
+    }//GEN-LAST:event_txtSubmitActionPerformed
+
+    private void txtAdminlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdminlActionPerformed
+        // TODO add your handling code here:
+        if (txtUser.getText().length()==0 || txtPass.getText().length()==0)
+        {
+            JOptionPane.showMessageDialog(this,"Username field empty.");
+        }
+        else
+        {
             try {
-                pst =(PreparedStatement) con.prepareStatement("SELECT * FROM admin_login WHERE admin_username=? and admin_pass=?");
-            } catch (SQLException ex) {
+                String user = txtUser.getText();
+                String pass = txtPass.getText();
+                Class.forName("com.mysql.jdbc.Driver");
+                con = DriverManager.getConnection("jdbc:mysql://localhost/criminal_management", "root", "Atik9869@9869");
+                pst = con.prepareStatement("select * from admin_login where admin_username=? and admin_pass=?");
+                pst.setString(1, user);
+                pst.setString(2, pass);
+                rs = (ResultSet) pst.executeQuery();
+                if (rs.next())
+                {
+                    admin a = new admin();
+                    this.hide();
+                    a.setVisible(true);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this,"Incorrect Username or Password");
+                    txtUser.setText("");
+                    txtPass.setText("");
+                    txtUser.requestFocus();
+                }
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                pst.setString(1,Username);
-            } catch (SQLException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                pst.setString(2,Password);
-            } catch (SQLException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                rs=(ResultSet) pst.executeQuery();
-            } catch (SQLException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if(rs.next())
-            {
-                admin a=new admin();
-                this.hide();
-                a.setVisible(true);
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(this,"Incorrect Username & Password");
-                txtUser.setText("");
-                txtPass.setText("");
-                txtUser.requestFocus();
             }
         }
-       if(txtUser.getText().isEmpty() || txtPass.getText().isEmpty())
-       {
-           JOptionPane.showMessageDialog(this,"Please Insert Username & Password");
-       }
-       else
-       {
-           String Username=txtUser.getText();
-           String Password=txtPass.getText();
-           try {
-               Class.forName("com.mysql.jdbc.Driver");
-           } catch (ClassNotFoundException ex) {
-               Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           con = DriverManager.getConnection("jdbc:mysql:/localhost/criminal_management","root","Atik9869@9869");
-           try {
-               pst = (PreparedStatement) con.prepareStatement("SELECT * FROM admin_login WHERE admin_username=? and admin_pass=?");
-           } catch (SQLException ex) {
-               Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           try {
-               pst.setString(1,Username);
-           } catch (SQLException ex) {
-               Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           try {
-               pst.setString(2,Password);
-           } catch (SQLException ex) {
-               Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           try {
-               rs=(ResultSet) pst.executeQuery();
-           } catch (SQLException ex) {
-               Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           if(rs.next())
-           {
-               admin a=new admin();
-               this.hide();
-               a.setVisible(true);
-           }
-           else
-           {
-               JOptionPane.showMessageDialog(this,"Incorrect Username & Password");
-               txtUser.setText("");
-               txtPass.setText("");
-               txtUser.requestFocus();
-           }
-       }
     }//GEN-LAST:event_txtAdminlActionPerformed
 
     private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
@@ -333,6 +306,10 @@ ResultSet rs;
     // End of variables declaration//GEN-END:variables
 
     private void JOptionPaneMessageDialog(String please_Insert_Username__Password) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private Object txtUser() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
